@@ -1,4 +1,4 @@
-# Experiment-4---Implementation-of-MLP-with-Backpropagation
+<img width="527" alt="198937747-bd57220a-b28d-482c-97d1-448913c9a707" src="https://github.com/MaithreyanDinakaran/Experiment-4---Implementation-of-MLP-with-Backpropagation/assets/119104032/6f83cf23-06a0-4ffe-9d47-0631028b9540"># Experiment-4---Implementation-of-MLP-with-Backpropagation
 
 ## AIM:
 To implement a Multilayer Perceptron for Multi classification
@@ -118,7 +118,53 @@ Normalize our dataset.
 8. Finally, call the functions confusion_matrix(), and the classification_report() in order to evaluate the performance of our classifier.
 
 ## PROGRAM 
+```
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+data=pd.read_csv("/content/IRIS (1).csv")
+data.head()
+
+name=["sepal_length","sepal_width","petal_length","petal_width"]
+x=data.iloc[:,0:4]
+y=data.select_dtypes(include=[object])
+x.head()
+y.head()
+
+from sklearn import preprocessing
+label_encoder=preprocessing.LabelEncoder()
+data['species']=label_encoder.fit_transform(data['species'])
+data['species'].unique()
+
+from sklearn.model_selection import train_test_split
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.20)
+from sklearn.preprocessing import StandardScaler
+scaler=StandardScaler()
+scaler.fit(x_train)
+x_train=scaler.transform(x_train)
+x_test=scaler.transform(x_test)
+
+from sklearn.metrics import classification_report, confusion_matrix
+from sklearn.neural_network import MLPClassifier
+mlp=MLPClassifier(hidden_layer_sizes=(10,10,10),max_iter=1000)
+mlp.fit(x_train,y_train.values.ravel())
+predictions=mlp.predict(x_test)
+print(predictions)
+
+print(confusion_matrix(y_test,predictions))
+print(classification_report(y_test,predictions))
+```
 
 ## OUTPUT 
+<img width="527" alt="198937747-bd57220a-b28d-482c-97d1-448913c9a707" src="https://github.com/MaithreyanDinakaran/Experiment-4---Implementation-of-MLP-with-Backpropagation/assets/119104032/651b3033-814b-4d77-bc8e-cb847db8fca9">
+
+<img width="464" alt="198937784-3f5dacb4-2375-46c9-b42d-427a1e68a626" src="https://github.com/MaithreyanDinakaran/Experiment-4---Implementation-of-MLP-with-Backpropagation/assets/119104032/c354ac27-39c7-4731-9ca7-b89b354733d3">
+
+<img width="450" alt="198937830-25ca271a-ae7d-459b-a8e6-053ee8ec0128" src="https://github.com/MaithreyanDinakaran/Experiment-4---Implementation-of-MLP-with-Backpropagation/assets/119104032/51ea2bdd-910c-433d-a596-3d00a2933cb3">
+
+<img width="527" alt="198937846-11efab53-4404-4974-9108-8184c5c1d42d" src="https://github.com/MaithreyanDinakaran/Experiment-4---Implementation-of-MLP-with-Backpropagation/assets/119104032/60ef6fdd-53bc-4d6e-aeeb-a5713ec9713e">
+
+<img width="514" alt="198937862-bd3e43c7-8b6c-4778-b24a-64084f1a6f09" src="https://github.com/MaithreyanDinakaran/Experiment-4---Implementation-of-MLP-with-Backpropagation/assets/119104032/86ff11be-e587-489c-abbb-3abc832c022b">
 
 ## RESULT
+Thus Implementation-of-MLP-with-Backpropagation problem is executed successfully.
